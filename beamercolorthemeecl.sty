@@ -1,0 +1,74 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeecl}
+\mode<presentation>
+
+  \definecolor{ecl@black}{HTML}{2B2E34}
+  \definecolor{ecl@white}{HTML}{FFFFFF}
+  \definecolor{ecl@brown}{RGB}{140,24,47}
+  \colorlet{ecl@lightBrown}{ecl@brown!30!ecl@white}
+  \definecolor{ecl@darkRed}{RGB}{120,20,30}
+  % \colorlet{ecl@darkBrown}{ecl@brown!60!ecl@black}
+  \definecolor{ecl@gray}{HTML}{999999}
+  \definecolor{ecl@lightOrange}{HTML}{FFA25E}
+  \colorlet{ecl@orange}{ecl@lightOrange!80!ecl@darkRed}
+  %% Background gradients
+  \colorlet{ecl@dark@backgroundInner}{ecl@darkRed}
+  \colorlet{ecl@dark@backgroundOuter}{ecl@darkRed}
+  \colorlet{ecl@light@backgroundInner}{ecl@white}
+  \colorlet{ecl@light@backgroundOuter}{ecl@white}
+
+  %% Structures
+  \setbeamercolor{frametitle}{fg=ecl@brown}
+  \setbeamercolor{framesubtitle}{fg=ecl@black!75!ecl@white}
+  %% Text
+  \setbeamercolor{normal text}{fg=ecl@black, bg=ecl@white}
+  \setbeamercolor{structure}{fg=ecl@black, bg=ecl@white}
+  \setbeamercolor{alerted text}{fg=red}
+
+  %% Items, footnotes and links
+  \setbeamercolor{item}{fg=ecl@brown}
+  \setbeamercolor{footnote mark}{fg=ecl@brown}
+  \hypersetup{urlcolor=ecl@brown}
+  %% Blocks
+  \setbeamercolor{block title}{%
+    fg=ecl@white, bg=ecl@brown}
+  \setbeamercolor{block title example}{%
+    fg=ecl@white, bg=ecl@brown}
+  \setbeamercolor{block title alerted}{%
+    fg=ecl@white, bg=red}
+  \setbeamercolor{block body}{%
+    fg=ecl@brown, bg=ecl@gray!20!ecl@white}
+  %% Title
+  \setbeamercolor{title}{fg=ecl@white, bg=ecl@brown}
+  % Code listings
+%   \lstset{%
+%     basicstyle=\footnotesize\ttfamily,
+%     breakatwhitespace=false,
+%     breaklines=true,
+%     commentstyle=\color{green!60!ecl@black},
+%     extendedchars=true,
+%     keywordstyle=\color{blue},
+%     showspaces=false,
+%     showstringspaces=false,
+%     showtabs=false,
+%     stringstyle=\color{violet}}
+
+  \setbeamercolor*{palette primary}{use=structure,fg=ecl@white,bg=structure.fg}
+  \setbeamercolor*{palette secondary}{use=structure,fg=ecl@white,bg=ecl@brown}
+  \setbeamercolor*{palette tertiary}{use=structure,fg=ecl@white,bg=structure.fg!50!ecl@brown}
+  \setbeamercolor*{palette quaternary}{fg=ecl@white,bg=structure.fg!75!ecl@brown}
+
+  \setbeamercolor*{sidebar}{use=structure,bg=ecl@brown}
+    
+  \setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+  \setbeamercolor*{palette sidebar secondary}{fg=ecl@white}
+  \setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+  \setbeamercolor*{palette sidebar quaternary}{fg=ecl@white}
+
+  \setbeamercolor*{logo}{bg=ecl@brown}
+
+\mode
+<all>
+\endinput
+%%
+%% End of file `beamercolorthemeecl-mu-econ.sty'.

@@ -1,0 +1,296 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthemeecl}
+\mode<presentation>
+
+\setbeamertemplate{navigation symbols}{}
+
+%% =======================================================================
+%% Sidebar
+%% =======================================================================
+
+% The footer padding
+\newlength\ecl@lengths@footerpad
+\setlength\ecl@lengths@footerpad{0.5cm}
+% The upper margin
+\newlength\ecl@lengths@titleline
+\setlength\ecl@lengths@titleline{1.2cm}
+% The side margins
+\newlength\ecl@lengths@margin
+\setlength\ecl@lengths@margin{0.5cm}
+% The titles indent
+\newlength\ecl@lengths@titleindent
+\setlength\ecl@lengths@titleindent{0cm}
+% The sidebar dimensions
+\newdimen\beamer@sidebarwidth
+\newdimen\beamer@headheight
+\usebeamerfont{frametitle}
+\beamer@sidebarwidth=2cm
+% Title separator
+\beamer@headheight=0.6\baselineskip
+\reset@font
+
+\def\beamer@lefttext{left}
+
+\DeclareOptionBeamer{hideothersubsections}[]{\beamer@nav@subsectionstyle{show/show/hide}}
+\DeclareOptionBeamer{hideallsubsections}[]{\beamer@nav@subsectionstyle{hide}}
+
+\DeclareOptionBeamer{width}{\beamer@sidebarwidth=#1}
+\DeclareOptionBeamer{height}{\beamer@headheight=#1}
+\DeclareOptionBeamer{left}{\def\beamer@sidebarside{left}}
+\DeclareOptionBeamer{right}{\def\beamer@sidebarside{right}}
+\ExecuteOptionsBeamer{left}
+\ProcessOptionsBeamer
+
+\ifdim\beamer@headheight>0pt
+% if head height is 0pt, use default frame title
+
+  % \setbeamercolor*{frametitle}{parent=sidebar}
+
+  \defbeamertemplate*{frametitle}{ecl}
+  {%
+    \vskip-1em
+    \vskip\ecl@lengths@titleline
+    \nointerlineskip%
+    \ifbeamer@plainframe%
+      \hbox{\usebeamercolor[bg]{frametitle}%
+        \@tempdima\paperwidth\advance\@tempdima-\beamer@sidebarwidth
+        \hskip-\beamer@leftmargin\vrule height\beamer@headheight width\@tempdima\hskip-\beamer@rightmargin}%
+      \nointerlineskip%
+    \fi%
+    \vskip-\beamer@headheight%
+    \vbox to \beamer@headheight{%
+      \vfil
+      \leftskip=-\beamer@leftmargin%
+      \advance\leftskip by \dimexpr\ecl@lengths@titleindent+\ecl@lengths@margin%
+      \rightskip=-\beamer@rightmargin%
+      \advance\rightskip by0.3cm plus1fil%
+      {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\par}%
+      {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+      \vbox{}%
+      \vskip-1em%
+      \vfil
+    }%
+  }
+
+  \defbeamertemplate*{headline}{ecl}
+  {%
+    \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+      \ifx\beamer@sidebarside\beamer@lefttext%
+      \else%
+        \hfill%
+      \fi%
+      \ifdim\beamer@sidebarwidth>0pt%  
+        \usebeamercolor[bg]{logo}%
+        \vrule width\beamer@sidebarwidth height \beamer@headheight%
+        \hskip-\beamer@sidebarwidth%
+        \hbox to \beamer@sidebarwidth{\hss\vbox to
+          \beamer@headheight{\vss\hbox{\vspace{-6ex}\color{fg}\includegraphics[width=0.8\beamer@sidebarwidth]{logos/logo_rectangle_white}}\vss}\hss}%
+      \else%
+        \vrule width0pt height \beamer@headheight%  
+      \fi%
+    \end{beamercolorbox}
+  }
+
+% Headline simple (no sidebar mode)
+
+%     \defbeamertemplate*{headline}{ecl}
+% {%
+%     \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{upper separation line head}
+%     \end{beamercolorbox}
+%     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+%       leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}
+%       \usebeamerfont{title in head/foot}\insertshorttitle
+%     \end{beamercolorbox}
+%     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+%       leftskip=.3cm,rightskip=.3cm plus1fil]{section in head/foot}
+%       \usebeamerfont{section in head/foot}%
+%         \setbox\beamer@tempbox=\hbox{\insertsectionhead}%
+%         \ifdim\wd\beamer@tempbox>1pt%
+%           \hskip2pt\raise1.9pt\hbox{\vrule width0.4pt height1.875ex\vrule width 5pt height0.4pt}%
+%           \hskip1pt%
+%         \fi%
+%       \insertsectionhead
+%     \end{beamercolorbox}
+%     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+%       leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+%       \usebeamerfont{subsection in head/foot}%
+%         \setbox\beamer@tempbox=\hbox{\insertsubsectionhead}%
+%         \ifdim\wd\beamer@tempbox>1pt%
+%           \hskip9.4pt\raise1.9pt\hbox{\vrule width0.4pt height1.875ex\vrule width 5pt height0.4pt}%
+%           \hskip1pt%
+%         \fi%
+%       \insertsubsectionhead
+%     \end{beamercolorbox}
+%     \begin{beamercolorbox}[wd=\paperwidth,colsep=1.5pt]{lower separation line head}
+%     \end{beamercolorbox}
+% }
+
+
+
+\fi
+
+
+\def\beamer@sidebarformat#1#2#3{%
+  \begin{beamercolorbox}[wd=\beamer@sidebarwidth,leftskip=#1,rightskip=1ex plus1fil,vmode]{#2}
+    \vbox{}%
+    #3\par%
+    \vbox{}%
+    \vskip-1.5ex%
+  \end{beamercolorbox}
+}
+
+\defbeamertemplate*{section in sidebar}{ecl}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{5pt}{section in sidebar}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{section in sidebar shaded}{ecl}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{5pt}{section in sidebar shaded}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{subsection in sidebar}{ecl}
+{%
+  \beamer@sidebarformat{10pt}{subsection in sidebar}{\insertsubsectionhead}%
+}
+
+\defbeamertemplate*{subsection in sidebar shaded}{ecl}
+{%
+  \beamer@sidebarformat{10pt}{subsection in sidebar shaded}{\insertsubsectionhead}%
+}
+
+\defbeamertemplate*{subsubsection in sidebar}{ecl}
+{%
+  \beamer@sidebarformat{12pt}{subsubsection in sidebar}{\insertsubsubsectionhead}%
+}
+
+\defbeamertemplate*{subsubsection in sidebar shaded}{ecl}
+{%
+  \beamer@sidebarformat{12pt}{subsubsection in sidebar shaded}{\insertsubsubsectionhead}%
+}
+
+
+\ifdim\beamer@sidebarwidth>0pt
+
+  % Sidebar
+  \setbeamersize{sidebar width \beamer@sidebarside=\beamer@sidebarwidth}
+  \defbeamertemplate*{sidebar \beamer@sidebarside}{ecl}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    {\usebeamerfont{title in sidebar}%
+      \vskip3em%
+      \hskip3pt%
+      \usebeamercolor[fg]{title in sidebar}%
+      \insertshorttitle[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    {%
+      % \hskip3pt%
+      % \usebeamercolor[fg]{author in sidebar}%
+      % \usebeamerfont{author in sidebar}%
+      % \insertshortauthor[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      % \vskip1.25em%
+    }%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+  }%
+  
+  \ifx\beamer@sidebarside\beamer@lefttext%
+    \defbeamertemplate*{sidebar right}{sidebar theme}
+    {%
+      \vfill%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt}
+  \fi
+    % Margins
+  \setbeamersize{text margin left=\ecl@lengths@margin,text margin right=\ecl@lengths@margin}
+\fi
+
+
+%% =======================================================================
+%% Title Page
+%% =======================================================================
+
+\defbeamertemplate*{title page}{ecl}{%
+
+  % This is slide 0
+  \setcounter{framenumber}{0}
+  \vskip-\beamer@frametopskip  
+
+  \hspace*{-0.5\beamer@sidebarwidth}\parbox[c]{\textwidth}{ 
+     \begin{centering}
+
+      \makebox[\linewidth][c]{%
+      \begin{minipage}{\dimexpr\textwidth+3.6cm\relax}
+      \begin{beamercolorbox}[sep=25pt,center]{title}
+      \tikz[remember picture,overlay]\node [xshift=2.8cm,yshift=-1cm] at (current page.north west) {\includegraphics[scale=0.23]{logos/ECL_corner_top_small}};
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.5em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+      \end{beamercolorbox}%
+      \end{minipage}%
+    }%
+    \end{centering}
+  }
+    \vfill
+    \hspace*{-0.5\beamer@sidebarwidth}\parbox[c]{\textwidth}{
+        \begin{beamercolorbox}[sep=5pt,center]{author}
+        \usebeamerfont{author}\insertauthor
+        \end{beamercolorbox}
+    }
+    \vfill
+    \hspace*{-0.5\beamer@sidebarwidth}\parbox[c]{\textwidth}{
+    \begin{beamercolorbox}[sep=0pt,center]{institute}
+    \usebeamerfont{institute}\insertinstitute\vskip0.5em\par\vfill
+    \includegraphics[height=20mm]{logos/logo}
+    \end{beamercolorbox}
+    }
+    \vfill
+    \hspace*{-0.5\beamer@sidebarwidth}\parbox[c]{\textwidth}{
+    \begin{beamercolorbox}[sep=5pt,center]{supervisor}
+    \usebeamerfont{supervisor}\supervisor
+    \end{beamercolorbox}
+    }
+    \vfill
+    \hspace*{-0.5\beamer@sidebarwidth}\parbox[c]{\textwidth}{
+    \begin{beamercolorbox}[sep=2pt,center]{date}
+      \usebeamerfont{date}\raggedbottom\insertdate
+    \end{beamercolorbox}
+    }
+}
+
+\defbeamertemplate*{footline}{ecl}{%
+  \ifnum\c@framenumber=0\else%
+    \begin{tikzpicture}[overlay]
+      \node[anchor=south east,
+        yshift=\ecl@lengths@footerpad,
+        xshift=-\ecl@lengths@footerpad] at
+        (current page.south east) {
+          \usebeamercolor[fg]{framenumber}%
+          \usebeamerfont{framenumber}%
+          \insertframenumber/\inserttotalframenumber};
+    \end{tikzpicture}
+  \fi}
+
+
+\mode
+<all>
+\endinput
+%%
+%% End of file `beamerouterthemeecl-mu.sty'.

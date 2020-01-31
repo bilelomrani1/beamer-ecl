@@ -1,0 +1,28 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}
+\usepackage{listings}
+\frenchspacing
+
+\uselanguage{french}
+\languagepath{french}
+\deftranslation[to=french]{Definition}{Définition}
+\deftranslation[to=french]{definition}{définition}
+\deftranslation[to=french]{Theorem}{Théorème}
+\deftranslation[to=french]{theorem}{théorème}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}

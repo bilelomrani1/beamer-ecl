@@ -1,0 +1,38 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeecl}
+\mode<presentation>
+
+\defbeamertemplate*{itemize item}{ecl}{$\bullet$}
+\defbeamertemplate*{itemize subitem}{ecl}{\---}
+\defbeamertemplate*{itemize subsubitem}{ecl}{\guillemotright}
+\defbeamertemplate*{bibliography item}{ecl}{\insertbiblabel}
+\AtBeginDocument{%
+  \let\ecl@oldcite\cite
+  \def\cite#1{{%
+    \usebeamercolor[fg]{item}%
+    \ecl@oldcite{#1}}}}
+\defbeamertemplate*{section in toc}{ecl}{%
+  \usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.%
+  \usebeamercolor[fg]{structure}%
+  \kern1.25ex\inserttocsection\par}
+\defbeamertemplate*{subsection in toc}{ecl}{%
+  \hspace\leftmargini
+  \usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.\inserttocsubsectionnumber%
+  \usebeamercolor[fg]{structure}%
+  \kern1.25ex\inserttocsubsection\par}
+\defbeamertemplate*{subsubsection in toc}{ecl}{%
+  \hspace\leftmargini
+  \hspace\leftmarginii
+  \usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.\inserttocsubsectionnumber.%
+    \inserttocsubsubsectionnumber%
+  \usebeamercolor[fg]{structure}%
+  \kern1.25ex\inserttocsubsubsection\par}
+
+\mode
+<all>
+\endinput
+%%
+%% End of file `beamerinnerthemeecl-mu.sty'.
